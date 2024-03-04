@@ -248,7 +248,8 @@ function mockServiceMethod(service, client, method, replace) {
 
     // If the value of 'replace' is a function we call it with the arguments.
     if (typeof replace === 'function') {
-      const result = replace.apply(replace, userArgs.concat([callback]));
+	  // YS: add the credentials to the mock
+      const result = replace.apply(replace, userArgs.concat([config, callback]));
       if (storedResult === undefined && result != null &&
           (typeof result.then === 'function' || result instanceof Readable)) {
         storedResult = result
